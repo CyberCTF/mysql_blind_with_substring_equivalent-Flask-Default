@@ -11,3 +11,15 @@ services:
     environment:
       - FLASK_ENV=production
     restart: unless-stopped 
+  db:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: acme_store
+      MYSQL_USER: acmeuser
+      MYSQL_PASSWORD: acmepass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../deploy/init.sql:/docker-entrypoint-initdb.d/init.sql:ro 

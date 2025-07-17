@@ -1,44 +1,43 @@
 {
   "site": {
-    "name": "Ecommerce",
-    "description": "A Capture The Flag platform for security challenges",
+    "name": "AcmeBooks Portal",
+    "description": "AcmeBooks: Search and manage your bookstore inventory securely.",
     "logo": "/logo.svg",
-    "copyright": "2025 Cyber CTF"
+    "copyright": "2025 AcmeBooks"
   },
   "navigation": {
     "main": [
-      { "link": "/", "title": "Home" }
+      { "link": "/", "title": "Home" },
+      { "link": "/books", "title": "Book Search" }
     ],
-    "auth": [
-      { "link": "/login", "title": "Login" },
-      { "link": "/register", "title": "Register" }
-    ]
+    "auth": []
   },
   "footer": {
     "links": [
-      { "link": "/", "title": "Home" }
+      { "link": "/", "title": "Home" },
+      { "link": "/books", "title": "Book Search" }
     ],
     "social": [
       {
         "name": "Website",
-        "href": "https://www.cyberctf.fr",
+        "href": "https://www.acmebooks.com",
         "icon": "website"
       },
       {
         "name": "GitHub",
-        "href": "https://github.com/cyberctf",
+        "href": "https://github.com/acmebooks",
         "icon": "github"
       }
     ]
   },
   "challenge": {
-    "title": "Database Security Challenge",
-    "description": "Find and exploit the SQL injection vulnerability in the login form. Use your knowledge of database security to bypass authentication.",
-    "skills": ["SQL", "Security", "Web", "Authentication"],
-    "points": 160
+    "title": "Database Security Assessment",
+    "description": "Identify and exploit a security flaw in the book search feature to demonstrate the importance of secure coding practices.",
+    "skills": ["SQL", "Security", "Web"],
+    "points": 0
   },
   "cta": {
-    "label": "Start the lab",
-    "link": "/lab"
+    "label": "Go to Book Search",
+    "link": "/books"
   }
 } 

@@ -1,6 +1,8 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import json
 import os
+import mysql.connector
+from mysql.connector import Error
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -19,6 +21,16 @@ def load_metadata():
             "cta": {"label": "Start", "link": "/"}
         }
 
+# MySQL connection utility
+def get_db_connection():
+    return mysql.connector.connect(
+        host='db',
+        user='acmeuser',
+        password='acmepass',
+        database='acme_store',
+        port=3306
+    )
+
 @app.route('/')
 def home():
     metadata = load_metadata()
@@ -27,6 +39,34 @@ def home():
 @app.route('/api/metadata')
 def api_metadata():
     return jsonify(load_metadata())
+
+@app.route('/books')
+def books():
+    metadata = load_metadata()
+    return render_template('books.html', metadata=metadata)
+
+@app.route('/search')
+def search():
+    q = request.args.get('q', '')
+    found = False
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        # Vulnerable SQL: direct string interpolation
+        sql = f"SELECT * FROM books WHERE title LIKE '%{q}%'"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        found = result is not None
+    except Error:
+        # Suppress errors for blind SQLi
+        pass
+    finally:
+        try:
+            cursor.close()
+            conn.close()
+        except:
+            pass
+    return render_template('search_result.html', found=found, q=q)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000) 

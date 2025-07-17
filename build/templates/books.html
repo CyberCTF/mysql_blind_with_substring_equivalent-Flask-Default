@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-[60vh]">
+  <div class="bg-gray-900 bg-opacity-80 rounded-2xl shadow-2xl p-10 w-full max-w-xl backdrop-blur-md border border-gray-800">
+    <h2 class="text-3xl font-bold mb-4 text-white text-center">Book Search</h2>
+    <form action="/search" method="get" class="flex flex-col gap-4" aria-label="Book search form">
+      <label for="q" class="text-gray-300 font-medium">Search by title</label>
+      <input id="q" name="q" type="text" required placeholder="Enter book title..." class="rounded-lg px-4 py-3 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600" aria-label="Book title">
+      <button type="submit" class="mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all">Search</button>
+    </form>
+  </div>
+</div>
+{% endblock %} 
